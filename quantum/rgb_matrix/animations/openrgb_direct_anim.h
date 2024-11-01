@@ -1,6 +1,7 @@
 #ifdef OPENRGB_ENABLE
 RGB_MATRIX_EFFECT(OPENRGB_DIRECT)
 #    ifdef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
+extern RGB g_openrgb_direct_mode_colors[RGB_MATRIX_LED_COUNT];
 
 bool OPENRGB_DIRECT(effect_params_t* params) {
     RGB_MATRIX_USE_LIMITS(led_min, led_max);
@@ -23,7 +24,7 @@ bool OPENRGB_DIRECT(effect_params_t* params) {
         );
         #endif
     }
-    return led_max < DRIVER_LED_TOTAL;
+    return led_max < RGB_MATRIX_LED_COUNT;
 }
 #    endif
 #endif
