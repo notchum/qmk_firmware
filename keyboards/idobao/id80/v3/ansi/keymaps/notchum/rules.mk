@@ -1,0 +1,2 @@
+VIA_ENABLE = no
+OPENRGB_ENABLE = yes
