@@ -8,6 +8,45 @@
 
 This is a keyboard firmware based on the [tmk\_keyboard firmware](https://github.com/tmk/tmk_keyboard) with some useful features for Atmel AVR and ARM controllers, and more specifically, the [OLKB product line](https://olkb.com), the [ErgoDox EZ](https://ergodox-ez.com) keyboard, and the Clueboard product line.
 
+## OpenRGB Support
+
+This fork adds the OpenRGB QMK Protocol patch as originally authored [here](https://github.com/Kasper24/QMK-OpenRGB), but with a few updates to align it with the latest (as of October 31st, 2024) QMK changes.
+
+## My Keyboard
+
+I use an IDOBAO ID80v3 keyboard so I have created my custom keymap for that board only. The `rules.mk` file within the keymap directory defines that OpenRGB should be enabled for this keymap.
+
+### Compiling
+
+From the local directory of this repo:
+```sh
+qmk compile -kb idobao/id80/v3/ansi -km notchum
+```
+
+### Flashing (Linux)
+
+Ensure the keyboard is plugged directly into the computer and __not__ to a USB hub. Then run:
+```sh
+qmk flash -kb idobao/id80/v3/ansi -km notchum
+```
+On the underside of the keyboard's PCB, hit the reset button to put it into DFU Mode. QMK should detect that and finish flashing the board.
+
+### Enabling in OpenRGB
+
+After flashing the board, open OpenRGB. Go to 'Settings' and select 'OpenRGB QMK Protocol' from the left panel. Here you will click 'Add' and give the keyboard a name as well as fill in the USB VID & PID.
+
+> These IDs can be found by running:
+> ```sh
+> lsusb
+> ```
+> There should be a line in the output with the keyboard's name. For example:
+> ```
+> Bus 005 Device 028: ID 6964:0380 IDOBAO IDOBAO ID80v3
+> ```
+> So, my keyboard's VID is `6964` and UID is `0380`.
+
+After adding the keyboard in OpenRGB, click 'Save' then 'Rescan Devices' to find the keyboard.
+
 ## Documentation
 
 * [See the official documentation on docs.qmk.fm](https://docs.qmk.fm)
